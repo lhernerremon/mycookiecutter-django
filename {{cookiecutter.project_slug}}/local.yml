@@ -13,9 +13,6 @@ services:
     container_name: django
     depends_on:
       - postgres
-      {%- if cookiecutter.use_mailhog == 'y' %}
-      - mailhog
-      {%- endif %}
     volumes:
       - .:/app:z
     env_file:
@@ -53,15 +50,6 @@ services:
       - "7000:7000"
     command: /start-docs
 
-  {%- if cookiecutter.use_mailhog == 'y' %}
-
-  mailhog:
-    image: mailhog/mailhog:v1.0.0
-    container_name: mailhog
-    ports:
-      - "8025:8025"
-
-  {%- endif %}
   {%- if cookiecutter.use_celery == 'y' %}
 
   redis:
@@ -75,9 +63,6 @@ services:
     depends_on:
       - redis
       - postgres
-      {% if cookiecutter.use_mailhog == 'y' -%}
-      - mailhog
-      {%- endif %}
     ports: []
     command: /start-celeryworker
 
@@ -88,9 +73,6 @@ services:
     depends_on:
       - redis
       - postgres
-      {% if cookiecutter.use_mailhog == 'y' -%}
-      - mailhog
-      {%- endif %}
     ports: []
     command: /start-celerybeat
 
@@ -101,26 +83,5 @@ services:
     ports:
       - "5555:5555"
     command: /start-flower
-
-  {%- endif %}
-  {%- if cookiecutter.js_task_runner == 'Gulp' %}
-
-  node:
-    build:
-      context: .
-      dockerfile: ./compose/local/node/Dockerfile
-    image: {{ cookiecutter.project_slug }}_local_node
-    container_name: node
-    depends_on:
-      - django
-    volumes:
-      - .:/app:z
-      # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
-      - /app/node_modules
-    command: npm run dev
-    ports:
-      - "3000:3000"
-      # Expose browsersync UI: https://www.browsersync.io/docs/options/#option-ui
-      - "3001:3001"
 
   {%- endif %}
