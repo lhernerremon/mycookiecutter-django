@@ -1,0 +1,25 @@
+{
+    "project_name": "My Awesome Project",
+    "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
+    "description": "Behold My Awesome Project!",
+    "author_name": "Divelia",
+    "domain_name": "example.com",
+    "email": "{{ cookiecutter.author_name.lower()|replace(' ', '-') }}@example.com",
+    "version": "0.1.0",
+    "timezone": "UTC-5",
+    "use_pycharm": "n",
+    "use_docker": "n",
+    "postgresql_version": [
+      "12.3",
+      "11.8"
+    ],
+    "use_async": "n",
+    "use_drf": "n",
+    "use_celery": "n",
+    "ci_tool": [
+      "None",
+      "Travis",
+      "Gitlab",
+      "Github"
+    ],
+  }
