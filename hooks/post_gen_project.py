@@ -321,7 +321,7 @@ def main():
     else:
         remove_docker_files()
 
-    if "{{ cookiecutter.use_docker }}".lower() == "y" and "{{ cookiecutter.cloud_provider}}".lower() != "aws":
+    if "{{ cookiecutter.use_docker }}".lower() == "y":
         remove_aws_dockerfile()
 
     if "{{ cookiecutter.use_heroku }}".lower() == "n":
@@ -349,12 +349,12 @@ def main():
         if "{{ cookiecutter.use_docker }}".lower() == "y":
             remove_node_dockerfile()
 
-    if "{{ cookiecutter.cloud_provider}}".lower() == "none":
-        print(
-            WARNING + "You chose not to use a cloud provider, "
-            "media files won't be served in production." + TERMINATOR
-        )
-        remove_storages_module()
+    # if "{{ cookiecutter.cloud_provider}}".lower() == "none":
+    #     print(
+    #         WARNING + "You chose not to use a cloud provider, "
+    #         "media files won't be served in production." + TERMINATOR
+    #     )
+    #     remove_storages_module()
 
     if "{{ cookiecutter.use_celery }}".lower() == "n":
         remove_celery_files()
