@@ -1,22 +1,31 @@
+# Django
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.hashers import make_password
+from django.db import models
+
+# Models Utils
+from model_utils.models import TimeStampedModel
 
 
-class User(AbstractUser):
-    """Default user for {{cookiecutter.project_name}}."""
+class User(AbstractUser, TimeStampedModel):
+    """Default user for Codebase Django."""
 
-    #: First and last name do not cover name patterns around the globe
-    name = CharField(_("Name of User"), blank=True, max_length=255)
-    first_name = None  # type: ignore
-    last_name = None  # type: ignore
+    email = models.EmailField("Correo electrónico", unique=True)
 
-    def get_absolute_url(self):
-        """Get url for user's detail view.
+    raw_password = models.CharField("Unencrypted password", max_length=255, blank=True, null=True)
 
-        Returns:
-            str: URL for user detail.
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
-        """
-        return reverse("users:detail", kwargs={"username": self.username})
+    def __str__(self):
+        return self.get_full_name() or self.get_username() or self.email
+
+    def set_password(self, raw_password):
+        """Overwrite this method because we need to save the raw password to send the welcome mail with the password """
+        self.password = make_password(raw_password)
+        self._password = raw_password
+        self.raw_password = raw_password
+
+    class Meta:
+        get_latest_by = "created"
+        ordering = ["-created", "-modified"]
