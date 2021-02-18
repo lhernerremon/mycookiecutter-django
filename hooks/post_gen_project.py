@@ -319,10 +319,7 @@ def main():
     if "{{ cookiecutter.use_docker }}".lower() == "y":
         remove_aws_dockerfile()
 
-    if "{{ cookiecutter.use_heroku }}".lower() == "n":
-        remove_heroku_files()
-
-    if "{{ cookiecutter.use_docker }}".lower() == "n" and "{{ cookiecutter.use_heroku }}".lower() == "n":
+    if "{{ cookiecutter.use_docker }}".lower() == "n":
         if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
             print(
                 INFO + ".env(s) are only utilized when Docker Compose and/or "
