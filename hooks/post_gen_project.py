@@ -296,6 +296,9 @@ def main():
         remove_celery_files()
         if "{{ cookiecutter.use_docker }}".lower() == "y":
             remove_celery_compose_dirs()
+    else:
+        if "{{ cookiecutter.use_docker }}".lower() == "n":
+            print(WARNING + "You need to use environ for .env for this variable: CELERY_BROKER_URL " + TERMINATOR)
 
     if "{{ cookiecutter.ci_tool }}".lower() != "travis":
         remove_dottravisyml_file()
@@ -305,6 +308,12 @@ def main():
 
     if "{{ cookiecutter.ci_tool }}".lower() != "github":
         remove_dotgithub_folder()
+
+    if "{{ cookiecutter.ci_tool }}".lower() == "gitlab":
+        print(
+            INFO + "Don't forget to add the variable SSH_PRIVATE_KEY in 'CI / CD -> Variables' "
+            "What is the content of the SSH access to AWS '{{cookiecutter.project_slug}}.pub' " + TERMINATOR
+        )
 
     if "{{ cookiecutter.use_drf }}".lower() == "n":
         remove_drf_starter_files()
