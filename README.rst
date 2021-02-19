@@ -71,3 +71,53 @@ Development
 * I will try to update and improve this codebase as I learn more. To get started on this project, I recommend you check out the Django, Cookiecutter pydanny documentation on how to make this project run locally. If you don't want to, just run:
 
 
+pyup
+~~~~~~~~~~~~~~~~~~
+Pyup brings you automated security and dependency updates used by Google and other organizations. Free for open source projects!
+
+Usage
+~~~~~~~~~~~~~~~~~~
+
+
+First, get Cookiecutter::
+
+    $ pip install "cookiecutter>=1.7.0"
+
+Now run it against this repo::
+
+    $ cookiecutter https://github.com/LhernerRemon/codebase-django
+
+You'll be prompted for some values. Provide them, then a Django project will be created for you.
+
+Answer the prompts with your own desired options_. For example::
+
+    project_name [Project Name]: Project Api
+    project_slug [project_api]: project_api
+    author_name [Dr Divelia]: Dr Divelia
+    email [you@example.com]: hello@project.com
+    description [Behold My Awesome Project!]: Api Rest with Django for my Project.
+    domain_name [example.com]: api.project.com
+    version [0.0.1]: 0.0.1
+    timezone [UTC]: America/Lima
+    use_celery [n]: y
+    use_pycharm [n]: y
+    use_docker [n]: n
+    Select postgresql_version:
+    1 - 12.3
+    2 - 11.8
+    debug[n]: n
+
+Enter the project and take a look around::
+
+    $ cd project_api/
+    $ ls
+
+For Readers of Two Scoops of Django
+--------------------------------------------
+
+You may notice that some elements of this project do not exactly match what we describe in chapter 3. The reason for that is this project, amongst other things, serves as a test bed for trying out new ideas and concepts. Sometimes they work, sometimes they don't, but the end result is that it won't necessarily match precisely what is described in the book I co-authored.
+
+Do you want to use this project as yours?
+----------------
+
+I learned a lot by modifying the original project and adapting it to different needs. Feel free to modify, distribute, use privately, etc; since please just include the copyright and the license.
