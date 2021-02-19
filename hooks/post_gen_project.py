@@ -86,15 +86,6 @@ def remove_celery_files():
         os.remove(file_name)
 
 
-def remove_async_files():
-    file_names = [
-        os.path.join("config", "asgi.py"),
-        os.path.join("config", "websocket.py"),
-    ]
-    for file_name in file_names:
-        os.remove(file_name)
-
-
 def remove_dottravisyml_file():
     os.remove(".travis.yml")
 
@@ -332,7 +323,7 @@ def main():
     if "{{ cookiecutter.use_drf }}".lower() == "n":
         remove_drf_starter_files()
 
-    print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
+    print(SUCCESS + "Project initialized, Divelia is life, Divelia is love!" + TERMINATOR)
 
 
 if __name__ == "__main__":
