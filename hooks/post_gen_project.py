@@ -64,20 +64,6 @@ def remove_utility_files():
     shutil.rmtree("utility")
 
 
-def remove_heroku_files():
-    file_names = ["Procfile", "runtime.txt", "requirements.txt"]
-    for file_name in file_names:
-        if file_name == "requirements.txt" and "{{ cookiecutter.ci_tool }}".lower() == "travis":
-            # don't remove the file if we are using travisci but not using heroku
-            continue
-        os.remove(file_name)
-    remove_heroku_build_hooks()
-
-
-def remove_heroku_build_hooks():
-    shutil.rmtree("bin")
-
-
 def remove_gulp_files():
     file_names = ["gulpfile.js"]
     for file_name in file_names:
@@ -283,10 +269,6 @@ def remove_node_dockerfile():
     shutil.rmtree(os.path.join("compose", "local", "node"))
 
 
-def remove_aws_dockerfile():
-    shutil.rmtree(os.path.join("compose", "production", "aws"))
-
-
 def remove_drf_starter_files():
     os.remove(os.path.join("config", "api_router.py"))
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "users", "api"))
@@ -315,9 +297,6 @@ def main():
         remove_utility_files()
     else:
         remove_docker_files()
-
-    if "{{ cookiecutter.use_docker }}".lower() == "y":
-        remove_aws_dockerfile()
 
     if "{{ cookiecutter.use_docker }}".lower() == "n":
         if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
