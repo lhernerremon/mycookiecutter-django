@@ -333,6 +333,9 @@ def main():
         if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
             append_to_gitignore_file("!.envs/.local/")
 
+    if "{{ cookiecutter.use_docker }}".lower() == "y":
+        remove_node_dockerfile()
+
     if "{{ cookiecutter.use_celery }}".lower() == "n":
         remove_celery_files()
         if "{{ cookiecutter.use_docker }}".lower() == "y":
