@@ -52,6 +52,10 @@ def remove_pycharm_files():
         shutil.rmtree(docs_dir_path)
 
 
+def remove_docs_files():
+    shutil.rmtree("docs")
+
+
 def remove_docker_files():
     shutil.rmtree("compose")
 
@@ -277,6 +281,7 @@ def main():
         remove_pycharm_files()
 
     if "{{ cookiecutter.use_docker }}".lower() == "n":
+        remove_docs_files()
         remove_docker_files()
         remove_envs_and_associated_files()
     else:
