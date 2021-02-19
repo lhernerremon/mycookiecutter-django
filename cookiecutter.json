@@ -7,7 +7,6 @@
     "email": "{{ cookiecutter.author_name.lower()|replace(' ', '-') }}@example.com",
     "version": "0.0.1",
     "timezone": "UTC-5",
-    "use_whitenoise": "n",
     "use_pycharm": "n",
     "use_docker": "n",
     "postgresql_version": [
