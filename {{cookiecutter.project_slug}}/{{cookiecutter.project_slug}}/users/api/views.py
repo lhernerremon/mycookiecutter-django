@@ -9,6 +9,6 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 # Serializers
-from codebase_django.users.api.serializers import *
+from {{ cookiecutter.project_slug }}.users.api.serializers import *
 
 User = get_user_model()

@@ -19,7 +19,7 @@ if READ_DOT_ENV_FILE:
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "{{ cookiecutter.timezone }}"
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-PE"
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
@@ -92,7 +92,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 {%- if cookiecutter.use_drf == 'y' %}
-    # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+# https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 # LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 # LOGIN_URL = "account_login"

@@ -6,7 +6,7 @@
     "domain_name": "api.example.com",
     "email": "{{ cookiecutter.author_name.lower()|replace(' ', '-') }}@example.com",
     "version": "0.0.1",
-    "timezone": "UTC-5",
+    "timezone": "America/Lima",
     "use_pycharm": "n",
     "use_docker": "n",
     "postgresql_version": [

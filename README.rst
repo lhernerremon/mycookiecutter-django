@@ -12,7 +12,7 @@ Demo Cookiecutter Django
     :target: https://github.com/ambv/black
     :alt: Code style: black
 
-.. image:: https://img.shields.io/badge/version-0.0.3-34a853.svg
+.. image:: https://img.shields.io/badge/version-0.0.5-34a853.svg
     :target: #
     :alt: Code style: black
 
@@ -85,7 +85,7 @@ First, get Cookiecutter::
 
 Now run it against this repo::
 
-    $ cookiecutter https://github.com/LhernerRemon/codebase-django
+    $ cookiecutter https://github.com/LhernerRemon/demo-cookiecutter-django
 
 You'll be prompted for some values. Provide them, then a Django project will be created for you.
 
@@ -98,7 +98,7 @@ Answer the prompts with your own desired options_. For example::
     description [Behold My Awesome Project!]: Api Rest with Django for my Project.
     domain_name [example.com]: api.project.com
     version [0.0.1]: 0.0.1
-    timezone [UTC]: America/Lima
+    timezone [America/Lima]: America/Lima
     use_celery [n]: y
     use_pycharm [n]: y
     use_docker [n]: n
@@ -106,6 +106,8 @@ Answer the prompts with your own desired options_. For example::
     1 - 12.3
     2 - 11.8
     debug[n]: n
+
+.. _options: http://cookiecutter-django.readthedocs.io/en/latest/project-generation-options.html
 
 Enter the project and take a look around::
 

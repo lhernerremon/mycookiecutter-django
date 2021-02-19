@@ -66,6 +66,7 @@ services:
     command: /start-flower
 
   {%- endif %}
+  
   awscli:
     build:
       context: .
