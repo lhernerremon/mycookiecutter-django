@@ -1,20 +1,9 @@
 stages:
-  - lint
   - deploy
-
-flake8:
-  stage: lint
-  image: python:3.8-alpine
-  before_script:
-    - pip install -q flake8
-  script:
-    - flake8
 
 deploy-to-aws:
   image: alpine
   stage: deploy
-  dependencies:
-    - flake8
   before_script:
     - apk add openssh-client
     - eval $(ssh-agent -s)
@@ -22,11 +11,7 @@ deploy-to-aws:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    {% if cookiecutter.use_celery == 'y' -%}
-    - ssh -o StrictHostKeyChecking=no ubuntu@{{ cookiecutter.domain_name }} "cd /home/ubuntu/{{ cookiecutter.project_slug }}/; git pull; docker-compose -f production.yml build; docker-compose -f production.yml run --rm django python manage.py migrate; docker-compose -f production.yml up -d"
-    {% else -%}
     - ssh -o StrictHostKeyChecking=no ubuntu@{{ cookiecutter.domain_name }} "cd /home/ubuntu/{{ cookiecutter.project_slug }}/; git pull; docker-compose -f production.yml up --build -d; docker-compose -f production.yml run --rm django python manage.py migrate"
-    {%- endif %}
   only:
     - tags
   except:
