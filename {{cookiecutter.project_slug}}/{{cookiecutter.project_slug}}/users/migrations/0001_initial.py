@@ -2,34 +2,24 @@ import django.contrib.auth.models
 import django.contrib.auth.validators
 from django.db import migrations, models
 import django.utils.timezone
+import model_utils.fields
 
 
 class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [("auth", "0008_alter_user_username_max_length")]
+    dependencies = [
+        ("auth", "0011_update_proxy_permissions"),
+    ]
 
     operations = [
         migrations.CreateModel(
             name="User",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("password", models.CharField(max_length=128, verbose_name="password")),
-                (
-                    "last_login",
-                    models.DateTimeField(
-                        blank=True, null=True, verbose_name="last login"
-                    ),
-                ),
+                ("last_login", models.DateTimeField(blank=True, null=True, verbose_name="last login")),
                 (
                     "is_superuser",
                     models.BooleanField(
@@ -41,24 +31,16 @@ class Migration(migrations.Migration):
                 (
                     "username",
                     models.CharField(
-                        error_messages={
-                            "unique": "A user with that username already exists."
-                        },
+                        error_messages={"unique": "A user with that username already exists."},
                         help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
                         max_length=150,
                         unique=True,
-                        validators=[
-                            django.contrib.auth.validators.UnicodeUsernameValidator()
-                        ],
+                        validators=[django.contrib.auth.validators.UnicodeUsernameValidator()],
                         verbose_name="username",
                     ),
                 ),
-                (
-                    "email",
-                    models.EmailField(
-                        blank=True, max_length=254, verbose_name="email address"
-                    ),
-                ),
+                ("first_name", models.CharField(blank=True, max_length=30, verbose_name="first name")),
+                ("last_name", models.CharField(blank=True, max_length=150, verbose_name="last name")),
                 (
                     "is_staff",
                     models.BooleanField(
@@ -75,17 +57,23 @@ class Migration(migrations.Migration):
                         verbose_name="active",
                     ),
                 ),
+                ("date_joined", models.DateTimeField(default=django.utils.timezone.now, verbose_name="date joined")),
                 (
-                    "date_joined",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, verbose_name="date joined"
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now, editable=False, verbose_name="created"
                     ),
                 ),
                 (
-                    "name",
-                    models.CharField(
-                        blank=True, max_length=255, verbose_name="Name of User"
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now, editable=False, verbose_name="modified"
                     ),
+                ),
+                ("email", models.EmailField(max_length=254, unique=True, verbose_name="Correo electrónico")),
+                (
+                    "raw_password",
+                    models.CharField(blank=True, max_length=255, null=True, verbose_name="Unencrypted password"),
                 ),
                 (
                     "groups",
@@ -111,10 +99,11 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name_plural": "users",
-                "verbose_name": "user",
-                "abstract": False,
+                "ordering": ["-created", "-modified"],
+                "get_latest_by": "created",
             },
-            managers=[("objects", django.contrib.auth.models.UserManager())],
-        )
+            managers=[
+                ("objects", django.contrib.auth.models.UserManager()),
+            ],
+        ),
     ]
