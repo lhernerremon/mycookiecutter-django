@@ -32,6 +32,19 @@ certificatesResolvers:
 
 http:
   routers:
+    web-router:
+      {%- if cookiecutter.domain_name.count('.') == 1 %}
+      rule: "Host(`{{ cookiecutter.domain_name }}`) || Host(`www.{{ cookiecutter.domain_name }}`)"
+      {% else %}
+      rule: "Host(`{{ cookiecutter.domain_name }}`)"
+      {%- endif %}
+      entryPoints:
+        - web
+      middlewares:
+        - redirect
+        - csrf
+      service: django
+
     web-secure-router:
       {%- if cookiecutter.domain_name.count('.') == 1 %}
       rule: "Host(`{{ cookiecutter.domain_name }}`) || Host(`www.{{ cookiecutter.domain_name }}`)"

@@ -1,9 +1,21 @@
 stages:
+  - lint
   - deploy
+
+flake8:
+  stage: lint
+  image: python:3.8-alpine
+  before_script:
+    - pip install -q flake8
+  script:
+    - flake8
+
 
 deploy-to-aws:
   image: alpine
   stage: deploy
+  dependencies:
+    - flake8
   before_script:
     - apk add openssh-client
     - eval $(ssh-agent -s)
