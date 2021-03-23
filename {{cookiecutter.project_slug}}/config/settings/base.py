@@ -69,7 +69,6 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "corsheaders",
 {%- endif %}
-    # "drf_spectacular",
 ]
 
 LOCAL_APPS = [
@@ -316,22 +315,22 @@ SOCIALACCOUNT_ADAPTER = "{{cookiecutter.project_slug}}.users.adapters.SocialAcco
 {% if cookiecutter.use_drf == "y" -%}
 # Django Rest Framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.TokenAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        # "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_RENDERER_CLASSES": (
-        "rest_framework.renderers.JSONRenderer",
-        # "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
-        # "djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer",
+        "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
     ),
     "DEFAULT_PARSER_CLASSES": (
-        "rest_framework.parsers.JSONParser",
-        # "rest_framework.parsers.FormParser",
-        # "rest_framework.parsers.MultiPartParser",
-        # #
-        # "djangorestframework_camel_case.parser.CamelCaseFormParser",
-        # "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
-        # "djangorestframework_camel_case.parser.CamelCaseJSONParser",
+        "djangorestframework_camel_case.parser.CamelCaseFormParser",
+        "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
+        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
     ),
+    'JSON_UNDERSCOREIZE': {
+        'no_underscore_before_number': True,
+    },
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -339,16 +338,9 @@ CORS_URLS_REGEX = r"^/api/.*$"
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Dj Rest Auth - https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
-REST_AUTH_SERIALIZERS = {
+# REST_AUTH_SERIALIZERS = {
     # "LOGIN_SERIALIZER": ".serializers.MyLoginSerializer",
     # "USER_DETAILS_SERIALIZER": ".serializers.MyUserSerializer",
-}
+# }
 
 {%- endif %}
-
-# Spectacular
-SPECTACULAR_SETTINGS = {
-    # "POSTPROCESSING_HOOKS": [
-    #     "drf_spectacular.contrib.djangorestframework_camel_case.camelize_serializer_fields",
-    # ]
-}

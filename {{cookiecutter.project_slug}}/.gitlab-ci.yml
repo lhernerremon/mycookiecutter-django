@@ -23,7 +23,7 @@ deploy-to-aws:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@{{ cookiecutter.domain_name }} "cd /home/ubuntu/{{ cookiecutter.project_slug }}/; git pull; docker-compose -f production.yml up --build -d; docker-compose -f production.yml run --rm django python manage.py migrate"
+    - ssh -o StrictHostKeyChecking=no ubuntu@{{ cookiecutter.domain_name|replace('-', '_') }} "cd /home/ubuntu/{{ cookiecutter.project_slug }}/; git pull; docker-compose -f production.yml up --build -d; docker-compose -f production.yml run --rm django python manage.py migrate"
   only:
     - tags
   except:
