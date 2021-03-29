@@ -10,7 +10,7 @@ rcssmin==1.0.6  # https://github.com/ndparker/rcssmin
 argon2-cffi==20.1.0  # https://github.com/hynek/argon2_cffi
 redis==3.5.3  # https://github.com/andymccurdy/redis-py
 {%- if cookiecutter.use_docker == "y" %}
-hiredis==1.1.0  # https://github.com/redis/hiredis-py
+hiredis==2.0.0  # https://github.com/redis/hiredis-py
 {%- endif %}
 {%- if cookiecutter.use_celery == "y" %}
 celery==4.4.6  # pyup: < 5.0,!=4.4.7  # https://github.com/celery/celery
