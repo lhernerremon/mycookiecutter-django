@@ -1,3 +1,5 @@
-{% raw %}{% load i18n %}{% autoescape off %}
-Confirma tu E-mail. codebase
-{% endautoescape %}{% endraw %}
+{% raw %}
+{% autoescape off %}
+Hola, {{ user.username }}. Estás recibiendo este mensaje para confirmar tu e-mail de DemoDjango.
+{% endautoescape %}
+{% endraw %}

@@ -2,7 +2,7 @@
 from django.conf import settings
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
-# ViewSet
+# Views
 
 if settings.DEBUG:
     router = DefaultRouter()

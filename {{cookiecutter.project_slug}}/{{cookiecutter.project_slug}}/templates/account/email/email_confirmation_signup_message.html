@@ -1,9 +1,13 @@
-{% raw %}{% load account %} 
-{% user_display user as user_display %} {% autoescape off %} 
+{% raw %}
+{% autoescape off %}
+Hola, {{ user.username }}. Estás recibiendo este e-mail porque te registraste en DemoDjango
+Por favor, ingresa al siguiente enlace para verificar tu e-mail:
 
-Hola, {{ user_display }}. Estás recibiendo este e-mail porque
-el usuario {{ user_display }} ha usado tu e-mail para registrar una cuenta en
-codebase Para confirmar que esto es correcto, ingresa a:
+https://demo_django.com/verificar-email/{{ key }}
 
-https://Other.app/verificar-email/{{ key }} Demo agradece su comprensión. 
-{% endautoescape %}{% endraw %}
+Tu nombre de usuario, en caso lo hayas olvidado: {{ user.get_username }}
+
+Gracias, desde Demo.Django.
+https://demo_django.com/
+{% endautoescape %}
+{% endraw %}

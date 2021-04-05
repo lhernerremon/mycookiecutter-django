@@ -12,7 +12,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("users/", include("{{ cookiecutter.project_slug }}.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -29,6 +28,8 @@ if settings.DEBUG:
     # these url in browser to see how these error pages look like.
     # Include Docs too, and token with DRF
     urlpatterns += [
+        # Django Allauth
+        path("accounts/", include("allauth.urls")),
         # DRF auth token
         path("auth-token/", obtain_auth_token),
     ]

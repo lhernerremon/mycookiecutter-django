@@ -12,7 +12,7 @@ Demo Cookiecutter Django
     :target: https://github.com/ambv/black
     :alt: Code style: black
 
-.. image:: https://img.shields.io/badge/version-1.0.2-34a853.svg
+.. image:: https://img.shields.io/badge/version-0.0.6-34a853.svg
     :target: #
     :alt: Code style: black
 

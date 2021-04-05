@@ -11,7 +11,9 @@ class User(AbstractUser, TimeStampedModel):
     """Default user for Codebase Django."""
 
     email = models.EmailField("Correo electrónico", unique=True)
-
+    # name = models.CharField("Nombre completo", blank=True, max_length=255)
+    # first_name = None  # type: ignore
+    # last_name = None  # type: ignore
     raw_password = models.CharField("Unencrypted password", max_length=255, blank=True, null=True)
 
     USERNAME_FIELD = "email"

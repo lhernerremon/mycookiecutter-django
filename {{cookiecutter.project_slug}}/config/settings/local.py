@@ -2,10 +2,8 @@ from .base import *  # noqa
 from .base import env
 
 # GENERAL
-# https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = env(
+DEBUG = True # https://docs.djangoproject.com/en/dev/ref/settings/#debug
+SECRET_KEY = env( # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
     "DJANGO_SECRET_KEY",
     default="!!!SET DJANGO_SECRET_KEY!!!",
 )
@@ -19,8 +17,7 @@ ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 # # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
 # AWS_STORAGE_BUCKET_NAME = env("DJANGO_AWS_STORAGE_BUCKET_NAME")
 
-# CACHES
-# https://docs.djangoproject.com/en/dev/ref/settings/#caches
+# CACHES - https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -28,12 +25,10 @@ CACHES = {
     }
 }
 
-# EMAIL
-# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+# EMAIL - https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env("DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 
-# django-debug-toolbar
-# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#prerequisites
+# django-debug-toolbar - https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#prerequisites
 INSTALLED_APPS += ["debug_toolbar"]  # noqa F405
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa F405
@@ -52,18 +47,13 @@ if env("USE_DOCKER") == "yes":
     INTERNAL_IPS += [".".join(ip.split(".")[:-1] + ["1"]) for ip in ips]
 {%- endif %}
 
-# django-extensions
-# https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
+# django-extensions - https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
 INSTALLED_APPS += ["django_extensions"]  # noqa F405
 {% if cookiecutter.use_celery == 'y' -%}
 
-# Celery
+# Celery - http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-always-eager
 {% if cookiecutter.use_docker == 'n' -%}
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-always-eager
 CELERY_TASK_ALWAYS_EAGER = True
 {%- endif %}
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-eager-propagates
-CELERY_TASK_EAGER_PROPAGATES = True
-
+CELERY_TASK_EAGER_PROPAGATES = True # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-eager-propagates
 {%- endif %}
-
