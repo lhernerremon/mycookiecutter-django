@@ -14,7 +14,6 @@ urlpatterns = [
     path("users/", include("{{ cookiecutter.project_slug }}.users.urls", namespace="users")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 {% if cookiecutter.use_drf == 'y' %}
 # API URLS
 urlpatterns += [
@@ -22,7 +21,6 @@ urlpatterns += [
     path("api/", include("config.api_router")),
 ]
 {%- endif %}
-
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
@@ -30,8 +28,10 @@ if settings.DEBUG:
     urlpatterns += [
         # Django Allauth
         path("accounts/", include("allauth.urls")),
+        {%- if cookiecutter.use_drf == 'y' %}
         # DRF auth token
         path("auth-token/", obtain_auth_token),
+        {%- endif %}
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar

@@ -71,8 +71,8 @@ LOCAL_APPS = [
     "{{ cookiecutter.project_slug }}.users.apps.UsersConfig",
     # Your stuff: custom apps go here
 ]
-
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS  # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+# https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS  
 
 # MIGRATIONS - https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
 MIGRATION_MODULES = {"sites": "{{ cookiecutter.project_slug }}.contrib.sites.migrations"}
@@ -89,7 +89,7 @@ AUTH_USER_MODEL = "users.User"  # https://docs.djangoproject.com/en/dev/ref/sett
 # LOGIN_URL = "account_login" # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 {%- else %}
 LOGIN_REDIRECT_URL = "users:redirect"  # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_URL = "account_login" # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
+LOGIN_URL = "account_login"  # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 {%- endif %}
 
 # PASSWORDS - https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
@@ -127,11 +127,12 @@ MIDDLEWARE = [
 # STATIC - https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR / "staticfiles")
 STATIC_URL = "/static/"  # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-STATICFILES_DIRS = [str(APPS_DIR / "static")]  # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [str(APPS_DIR / "static")]  
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-] # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+]  # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 
 # MEDIA - https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = str(APPS_DIR / "media")
@@ -209,11 +210,10 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
-
 {% if cookiecutter.use_celery == 'y' -%}
+
 # CELERY
 if USE_TZ:
-    
     CELERY_TIMEZONE = TIME_ZONE  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
@@ -235,9 +235,8 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNT_ADAPTER = "{{cookiecutter.project_slug}}.users.adapters.AccountAdapter"
 SOCIALACCOUNT_ADAPTER = "{{cookiecutter.project_slug}}.users.adapters.SocialAccountAdapter"
 # django-allauth | social account providers- https://django-allauth.readthedocs.io/en/latest/providers.html
-
-
 {% if cookiecutter.use_drf == "y" -%}
+
 # DJANGO-REST-FRAMEWORK - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
