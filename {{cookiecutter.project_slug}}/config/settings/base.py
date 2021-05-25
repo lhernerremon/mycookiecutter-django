@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
-###################### {{ cookiecutter.project_slug }}/ ######################
+# {{ cookiecutter.project_slug }}
 APPS_DIR = ROOT_DIR / "{{ cookiecutter.project_slug }}"
 env = environ.Env()
 
@@ -37,7 +37,7 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS - https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = "config.urls"
-WSGI_APPLICATION = "config.wsgi.application" # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+WSGI_APPLICATION = "config.wsgi.application"  # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 
 # APPS
 DJANGO_APPS = [
@@ -72,7 +72,7 @@ LOCAL_APPS = [
     # Your stuff: custom apps go here
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS  # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 
 # MIGRATIONS - https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
 MIGRATION_MODULES = {"sites": "{{ cookiecutter.project_slug }}.contrib.sites.migrations"}
@@ -83,12 +83,12 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-AUTH_USER_MODEL = "users.User"# https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
+AUTH_USER_MODEL = "users.User"  # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 {%- if cookiecutter.use_drf == 'y' %}
-# LOGIN_REDIRECT_URL = "users:redirect" # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+# LOGIN_REDIRECT_URL = "users:redirect"  # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 # LOGIN_URL = "account_login" # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 {%- else %}
-LOGIN_REDIRECT_URL = "users:redirect" # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+LOGIN_REDIRECT_URL = "users:redirect"  # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 LOGIN_URL = "account_login" # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 {%- endif %}
 
@@ -126,8 +126,8 @@ MIDDLEWARE = [
 
 # STATIC - https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR / "staticfiles")
-STATIC_URL = "/static/" # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-STATICFILES_DIRS = [str(APPS_DIR / "static")] # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATIC_URL = "/static/"  # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+STATICFILES_DIRS = [str(APPS_DIR / "static")]  # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
@@ -135,7 +135,7 @@ STATICFILES_FINDERS = [
 
 # MEDIA - https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = str(APPS_DIR / "media")
-MEDIA_URL = "/media/" # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = "/media/"  # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 
 # TEMPLATES - https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
@@ -178,13 +178,13 @@ FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 
 # SECURITY - https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
 SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_HTTPONLY = True # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
-SECURE_BROWSER_XSS_FILTER = True # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
-X_FRAME_OPTIONS = "DENY" # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
+CSRF_COOKIE_HTTPONLY = True  # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
+SECURE_BROWSER_XSS_FILTER = True  # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
+X_FRAME_OPTIONS = "DENY"  # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 
 # EMAIL - https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env("DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
-EMAIL_TIMEOUT = 5 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
+EMAIL_TIMEOUT = 5  # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 DEFAULT_FROM_EMAIL = "{{cookiecutter.email}}"
 
 # ADMIN
@@ -214,15 +214,15 @@ LOGGING = {
 # CELERY
 if USE_TZ:
     
-    CELERY_TIMEZONE = TIME_ZONE # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
-CELERY_BROKER_URL = env("CELERY_BROKER_URL") # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
-CELERY_ACCEPT_CONTENT = ["json"] # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-accept_content
-CELERY_TASK_SERIALIZER = "json" # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_serializer
-CELERY_RESULT_SERIALIZER = "json" # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_serializer
-CELERY_TASK_TIME_LIMIT = 5 * 60 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-time-limit
-CELERY_TASK_SOFT_TIME_LIMIT = 60 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-soft-time-limit
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler" # http://docs.celeryproject.org/en/latest/userguide/configuration.html#beat-scheduler
+    CELERY_TIMEZONE = TIME_ZONE  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
+CELERY_ACCEPT_CONTENT = ["json"]  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-accept_content
+CELERY_TASK_SERIALIZER = "json"  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_serializer
+CELERY_RESULT_SERIALIZER = "json"  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_serializer
+CELERY_TASK_TIME_LIMIT = 5 * 60  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-time-limit
+CELERY_TASK_SOFT_TIME_LIMIT = 60  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-soft-time-limit
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"  # http://docs.celeryproject.org/en/latest/userguide/configuration.html#beat-scheduler
 
 {%- endif %}
 # DJANGO-ALLAUTH - https://django-allauth.readthedocs.io/en/latest/configuration.html
@@ -268,4 +268,5 @@ REST_USE_JWT = False  # If will use jwt
 # DJANGO CORS HEADER - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
 # CORS_ALLOW_ALL_ORIGINS = True
+
 {%- endif %}

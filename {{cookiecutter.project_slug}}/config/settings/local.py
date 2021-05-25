@@ -2,11 +2,8 @@ from .base import *  # noqa
 from .base import env
 
 # GENERAL
-DEBUG = True # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-SECRET_KEY = env( # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-    "DJANGO_SECRET_KEY",
-    default="!!!SET DJANGO_SECRET_KEY!!!",
-)
+DEBUG = True  # https://docs.djangoproject.com/en/dev/ref/settings/#debug
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="!!!SET DJANGO_SECRET_KEY!!!",)  # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
@@ -49,11 +46,12 @@ if env("USE_DOCKER") == "yes":
 
 # django-extensions - https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
 INSTALLED_APPS += ["django_extensions"]  # noqa F405
-{% if cookiecutter.use_celery == 'y' -%}
 
+{% if cookiecutter.use_celery == 'y' -%}
 # Celery - http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-always-eager
 {% if cookiecutter.use_docker == 'n' -%}
 CELERY_TASK_ALWAYS_EAGER = True
 {%- endif %}
 CELERY_TASK_EAGER_PROPAGATES = True # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-eager-propagates
+
 {%- endif %}
