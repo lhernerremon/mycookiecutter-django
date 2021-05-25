@@ -86,10 +86,6 @@ def remove_celery_files():
         os.remove(file_name)
 
 
-def remove_dottravisyml_file():
-    os.remove(".travis.yml")
-
-
 def remove_dotgitlabciyml_file():
     os.remove(".gitlab-ci.yml")
 
@@ -299,9 +295,6 @@ def main():
     else:
         if "{{ cookiecutter.use_docker }}".lower() == "n":
             print(WARNING + "You need to use environ for .env for this variable: CELERY_BROKER_URL " + TERMINATOR)
-
-    if "{{ cookiecutter.ci_tool }}".lower() != "travis":
-        remove_dottravisyml_file()
 
     if "{{ cookiecutter.ci_tool }}".lower() != "gitlab":
         remove_dotgitlabciyml_file()

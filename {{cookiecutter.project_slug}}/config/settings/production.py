@@ -86,7 +86,7 @@ TEMPLATES[-1]["OPTIONS"]["loaders"] = [  # type: ignore[index] # noqa F405
 
 # EMAIL - https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
-    "DJANGO_DEFAULT_FROM_EMAIL", default="{{cookiecutter.project_name}} <noreply@{{cookiecutter.domain_name}}>"
+    "DJANGO_DEFAULT_FROM_EMAIL", default="{{cookiecutter.project_name}}<noreply@{{cookiecutter.domain_name}}>"
 )
 SERVER_EMAIL = env(
     "DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL
@@ -95,7 +95,7 @@ SERVER_EMAIL = env(
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default="[{{cookiecutter.project_name}}]")
 # Add
 # EMAIL_CONFIG = env.email_url("EMAIL_URL")
-# vars().update(EMAIL_CONFI
+# vars().update(EMAIL_CONFIG)
 
 # ADMIN - Django Admin URL regex.
 ADMIN_URL = env("DJANGO_ADMIN_URL")

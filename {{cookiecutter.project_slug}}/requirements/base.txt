@@ -1,6 +1,6 @@
 # Base
 pytz==2021.1  # https://github.com/stub42/pytz
-python-slugify==4.0.1  # https://github.com/un33k/python-slugify
+python-slugify==5.0.2  # https://github.com/un33k/python-slugify
 Pillow==8.2.0  # https://github.com/python-pillow/Pillow
 {%- if cookiecutter.use_docker == 'n' %}
 rcssmin==1.0.6 --install-option="--without-c-extensions"  # https://github.com/ndparker/rcssmin
@@ -28,7 +28,7 @@ django-allauth==0.44.0  # https://github.com/pennersr/django-allauth
 django-crispy-forms==1.11.2  # https://github.com/django-crispy-forms/django-crispy-forms
 django-redis==4.12.1  # https://github.com/jazzband/django-redis
 drf-writable-nested==0.6.2 # https://github.com/beda-software/drf-writable-nested
-djangorestframework-simplejwt==4.6.0 # https://github.com/jazzband/django-rest-framework-simplejwt
+djangorestframework-simplejwt==4.7.0 # https://github.com/jazzband/django-rest-framework-simplejwt
 
 
 {%- if cookiecutter.use_drf == "y" %}
@@ -37,7 +37,7 @@ djangorestframework==3.12.4  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.7.0 # https://github.com/adamchainz/django-cors-headers
 
 # Auth
-dj-rest-auth==2.1.3 # https://github.com/iMerica/dj-rest-auth
+dj-rest-auth==2.1.5 # https://github.com/iMerica/dj-rest-auth
 djangorestframework-camel-case==1.2.0 # https://github.com/vbabiy/djangorestframework-camel-case
 {%- endif %}
 

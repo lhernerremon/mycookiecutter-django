@@ -1,0 +1,32 @@
+name: deploy to aws
+on: 
+  create:
+    branches:
+        - master
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: connect ssh
+      uses: fifsky/ssh-action@master
+      with:
+        {% if cookiecutter.use_docker == 'y' -%}
+        command: |
+          cd /home/{{ cookiecutter.project_slug }}/
+          git pull
+          docker-compose -f production.yml up --build -d
+          docker-compose -f production.yml run --rm django python manage.py migrate
+        {%- else %}
+        command: |
+          cd /home/{{ cookiecutter.project_slug }}/
+          git pull
+          python3 manage.py collectstatic --noinput
+          python3 manage.py migrate --noinput
+          sudo systemctl restart gunicorn nginx
+        {%- endif %}
+        host: {{ cookiecutter.domain_name }}
+        user: ubuntu
+        {% raw %}
+        key: ${{ secrets.SSH_PRIVATE_KEY}}
+        {% endraw %}

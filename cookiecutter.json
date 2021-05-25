@@ -17,7 +17,6 @@
     "use_celery": "n",
     "ci_tool": [
       "None",
-      "Travis",
       "Gitlab",
       "Github"
     ],
